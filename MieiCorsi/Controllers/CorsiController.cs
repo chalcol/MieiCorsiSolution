@@ -10,12 +10,12 @@ namespace MieiCorsi.Controllers
     {
         public IActionResult Index()
         {
-            return Content("Sono Index");
+            return View();
         }
 
         public IActionResult Details(String id)
         {
-            return Content($"sono detail e ho ricevuto un {id}");
+            return View();
         }
     }
 }
