@@ -13,13 +13,16 @@ namespace MieiCorsi.Controllers
         public IActionResult Index()
         {
             var courseService = new CourseService();// Istanza della classe CourseService
-            List<CourseViewModel> courses = courseService.GetServices();//lista di corsi restituita dall'istanza della classe CourseService.
+            List<CourseViewModel> courses = courseService.GetCourses();//lista di corsi restituita dall'istanza della classe CourseService.
             return View(courses);
         }
 
-        public IActionResult Details(String id)
+        public IActionResult Details(int id)
         {
-            return View();
+
+            var courseDetailsService = new CourseService();
+            CourseDetailsViewModel courseDetails = courseDetailsService.GetDetails(id);
+            return View(courseDetails);
         }
     }
 }
