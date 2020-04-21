@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using MieiCorsi.Models.Services.Application;
 
 namespace MieiCorsi
 {
@@ -27,6 +28,8 @@ namespace MieiCorsi
             services.AddRazorPages()
                 .AddRazorRuntimeCompilation();
             // code omitted for brevity
+
+            services.AddTransient<CourseService>();
 
 
         }
