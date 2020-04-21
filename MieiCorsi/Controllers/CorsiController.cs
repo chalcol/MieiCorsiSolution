@@ -13,7 +13,8 @@ namespace MieiCorsi.Controllers
         private readonly CourseService courseService;
 
         public CorsiController(CourseService courseService) // In questo modo possiamo  creare l'istanza della classe CourseService senza la "NEW" 
-            //: Questo meccanismo viene chiamato la DEPENDENCY INJECTION
+            //: Questo meccanismo viene chiamato la DEPENDENCY INJECTION 
+            //(il problema a questo punto è che il "CourseController" non può funzionare al meno  che no ci fornisca un istanza proprio di "CourseService" )
         {                                                    
             this.courseService = courseService;
         }
