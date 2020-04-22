@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace MieiCorsi.Models.Services.Application
 {
-    public class CourseService
+    public class CourseService : ICourseService
     {
         
         public List<CourseViewModel> GetCourses()

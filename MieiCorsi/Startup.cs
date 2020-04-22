@@ -29,7 +29,8 @@ namespace MieiCorsi
                 .AddRazorRuntimeCompilation();
             // code omitted for brevity
 
-            services.AddTransient<CourseService>(); // Abilita ASP.Net Core a creare un'istanza di CourseService ogni volta che viene usata nel controller
+            services.AddTransient<ICourseService, CourseService>(); 
+            // Abilita ASP.Net Core a creare un'istanza di CourseService ogni volta che viene usata nel controller
             //in Questo modo però l'stanza è ancora fortemente accoppiato al tipo "CourseService" 
 
         }
