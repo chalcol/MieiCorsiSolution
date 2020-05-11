@@ -8,7 +8,7 @@ namespace MieiCorsi.Models.Services.Application
 {
    public interface ICourseService
     {
-        List<CourseViewModel> GetCourses();
-        CourseDetailsViewModel GetDetails(int id);
+        Task<List<CourseViewModel>> GetCoursesAsync();
+        Task<CourseDetailsViewModel> GetDetailsAsync(int id);
     }
 }

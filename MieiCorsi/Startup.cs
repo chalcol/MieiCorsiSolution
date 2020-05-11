@@ -9,6 +9,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using MieiCorsi.Models.Services.Application;
+using MieiCorsi.Models.Services.Infrastructure;
 
 namespace MieiCorsi
 {
@@ -29,9 +30,11 @@ namespace MieiCorsi
                 .AddRazorRuntimeCompilation();
             // code omitted for brevity
 
-            services.AddTransient<ICourseService, CourseService>(); 
+            services.AddTransient<ICourseService, EfCoreCourseService>();
             // Abilita ASP.Net Core a creare un'istanza di CourseService ogni volta che viene usata nel controller
             //in Questo modo però l'stanza è ancora fortemente accoppiato al tipo "CourseService" 
+            //services.AddTransient<IDatabaseAccessor, SqlDatabaseAccessor>();
+            services.AddDbContext<MieiCorsiDbContext>();
 
         }
 
