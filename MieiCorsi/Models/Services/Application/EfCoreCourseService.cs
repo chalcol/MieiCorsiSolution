@@ -30,7 +30,7 @@ namespace MieiCorsi.Models.Services.Application
                 CurrentPrice = corso.CurrentPrice,
                 FullPrice = corso.FullPrice
                
-            })
+            }).AsNoTracking()
                 .ToListAsync();
 
             return courses;

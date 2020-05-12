@@ -44,8 +44,10 @@ namespace MieiCorsi.Models.Services.Infrastructure
                 
                 , builder =>
                   {
-                      builder.Property(money => money.Currency).HasColumnName("CurrentPrice_Currency")//Superfluo perché Stiamo rispettando la convenzione dei nomi
-                      .HasConversion<String>();
+                      builder.Property(money => money.Currency)
+                      .HasConversion<String>()
+                      .HasColumnName("CurrentPrice_Currency");//Superfluo perché Stiamo rispettando la convenzione dei nomi
+                      
                       builder.Property(money => money.Amount).HasColumnName("CurrentPrice_Amount");//Superfluo perché Stiamo rispettando la convenzione dei nomi
                   });
 
