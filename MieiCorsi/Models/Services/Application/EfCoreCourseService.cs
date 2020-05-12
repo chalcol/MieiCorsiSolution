@@ -30,15 +30,40 @@ namespace MieiCorsi.Models.Services.Application
                 CurrentPrice = corso.CurrentPrice,
                 FullPrice = corso.FullPrice
                
+               
+               
             }).AsNoTracking()
                 .ToListAsync();
 
             return courses;
         }
 
-        public Task<CourseDetailsViewModel> GetDetailsAsync(int id)
+        public async Task<CourseDetailsViewModel> GetDetailsAsync(int id)
         {
-            throw new NotImplementedException();
+            CourseDetailsViewModel corsoDetails = await dbContext.Corsi.Where(corso => corso.Id == id)
+                  .Select(corso =>
+                   new CourseDetailsViewModel
+                   {
+                       Id = corso.Id,
+                       Title = corso.Title,
+                       Description = corso.Description,
+                       ImagePath = corso.ImagePath,
+                       Author = corso.Author,
+                       Rating = corso.Rating,
+                       CurrentPrice = corso.CurrentPrice,
+                       FullPrice = corso.FullPrice,
+                       Lessons = corso.Lessons.Select(lesson =>
+                       new LessonViewModel
+                       {
+                           Id = lesson.Id,
+                           Title = lesson.Title,
+                           Description = lesson.Description,
+                           Duration = lesson.Duration
+                       }).ToList()
+                   }).AsNoTracking()
+                .SingleAsync();//Restituisce il primo elemento dell'elenco ma solleva un'eccezione se l'elenco è vuoto o ha più di un elemento univoco.
+
+            return corsoDetails;
         }
     }
 }

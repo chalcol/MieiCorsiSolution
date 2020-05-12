@@ -9,7 +9,7 @@ namespace MieiCorsi.Models.Entities
         public int CorsiId { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
-        public string Duration { get; set; }
+        public TimeSpan Duration { get; set; }
 
         public virtual Corsi Corsi { get; set; }
     }

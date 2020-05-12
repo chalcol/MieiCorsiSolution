@@ -4,7 +4,10 @@ namespace MieiCorsi.Models.ViewModels
 {
     public class LessonViewModel
     {
-      public string Title { get; set; }
-      public TimeSpan Duration { get; set; }
+        public int Id { get; set; }
+        public string Title { get; set; }
+        public String Description { get; set; }
+        public TimeSpan Duration { get; set; }
+
     }
 }
