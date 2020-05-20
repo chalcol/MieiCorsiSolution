@@ -19,21 +19,22 @@ namespace MieiCorsi.Models.Services.Application
         }
         public async Task<List<CourseViewModel>> GetCoursesAsync()
         {
-            List<CourseViewModel> courses = await dbContext.Corsi.Select(corso =>
-            new CourseViewModel
-            {
-                Id = corso.Id,
-                Title = corso.Title,
-                ImagePath = corso.ImagePath,
-                Author = corso.Author,
-                Rating = corso.Rating,
-                CurrentPrice = corso.CurrentPrice,
-                FullPrice = corso.FullPrice
-               
-               
-               
-            }).AsNoTracking()
-                .ToListAsync();
+            IQueryable<CourseViewModel> queryLink = dbContext.Corsi.AsNoTracking()
+                .Select(corso =>
+           new CourseViewModel
+           {
+               Id = corso.Id,
+               Title = corso.Title,
+               ImagePath = corso.ImagePath,
+               Author = corso.Author,
+               Rating = corso.Rating,
+               CurrentPrice = corso.CurrentPrice,
+               FullPrice = corso.FullPrice
+
+
+
+           });
+               List<CourseViewModel> courses = await queryLink.ToListAsync();
 
             return courses;
         }
@@ -41,6 +42,7 @@ namespace MieiCorsi.Models.Services.Application
         public async Task<CourseDetailsViewModel> GetDetailsAsync(int id)
         {
             CourseDetailsViewModel corsoDetails = await dbContext.Corsi.Where(corso => corso.Id == id)
+                .AsNoTracking()
                   .Select(corso =>
                    new CourseDetailsViewModel
                    {
@@ -60,7 +62,7 @@ namespace MieiCorsi.Models.Services.Application
                            Description = lesson.Description,
                            Duration = lesson.Duration
                        }).ToList()
-                   }).AsNoTracking()
+                   })
                 .SingleAsync();//Restituisce il primo elemento dell'elenco ma solleva un'eccezione se l'elenco è vuoto o ha più di un elemento univoco.
 
             return corsoDetails;

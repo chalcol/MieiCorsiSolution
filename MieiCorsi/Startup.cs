@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -15,12 +16,13 @@ namespace MieiCorsi
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
+       
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
@@ -34,7 +36,14 @@ namespace MieiCorsi
             // Abilita ASP.Net Core a creare un'istanza di CourseService ogni volta che viene usata nel controller
             //in Questo modo però l'stanza è ancora fortemente accoppiato al tipo "CourseService" 
             //services.AddTransient<IDatabaseAccessor, SqlDatabaseAccessor>();
-            services.AddDbContext<MieiCorsiDbContext>();
+            //services.AddScoped<MieiCorsiDbContext>();
+           // services.AddDbContext<MieiCorsiDbContext>();
+            services.AddDbContextPool<MieiCorsiDbContext>(optionsBuilder =>
+            {
+                //string connectionString = Configuration.GetConnectionString("Default"); // con il metodo GetConnection si riesce ugualmente a recuperare la connectionstring.
+                String connectionString = Configuration.GetSection("ConnectionStrings").GetValue<String>("Default");
+                optionsBuilder.UseSqlServer(connectionString);
+            });
 
         }
 
