@@ -71,7 +71,7 @@ namespace MieiCorsi
 
             //app.UseEndpoints(endpoints =>
             //{
-            /    endpoints.MapControllerRoute(f
+            //   endpoints.MapControllerRoute(f
             //        name: "default",
             //        pattern: "{controller=Home}/{action=Index}/{id?}");
             //});
