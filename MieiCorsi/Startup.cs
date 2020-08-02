@@ -32,7 +32,7 @@ namespace MieiCorsi
                 .AddRazorRuntimeCompilation();
             // code omitted for brevity
 
-            services.AddScoped<ICourseService, EfCoreCourseService>();
+            services.AddTransient<ICourseService, EfCoreCourseService>();
             // Abilita ASP.Net Core a creare un'istanza di CourseService ogni volta che viene usata nel controller
             //in Questo modo però l'stanza è ancora fortemente accoppiato al tipo "CourseService" 
             //services.AddTransient<IDatabaseAccessor, SqlDatabaseAccessor>();
@@ -71,7 +71,7 @@ namespace MieiCorsi
 
             //app.UseEndpoints(endpoints =>
             //{
-            /    endpoints.MapControllerRoute(f
+            //   endpoints.MapControllerRoute(
             //        name: "default",
             //        pattern: "{controller=Home}/{action=Index}/{id?}");
             //});
